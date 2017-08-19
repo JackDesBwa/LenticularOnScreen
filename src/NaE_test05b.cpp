@@ -522,6 +522,10 @@ int main( int argc, const char* argv[] )
 #define CV_WAITKEY_CURSORKEY_LEFT   2424832
 
 #elif __linux__
+#define CV_WAITKEY_CURSORKEY_TOP    82
+#define CV_WAITKEY_CURSORKEY_BOTTOM 84
+#define CV_WAITKEY_CURSORKEY_RIGHT  83
+#define CV_WAITKEY_CURSORKEY_LEFT   81
 
 #elif __APPLE__
 #define CV_WAITKEY_CURSORKEY_TOP    63232
