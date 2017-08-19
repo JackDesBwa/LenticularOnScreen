@@ -317,7 +317,7 @@ void my_mouse_callback(int event, int x, int y, int flags, void* param){
     }
 }
 
-void draw_button(char *s,int x1,int x2,int y1,int y2,cv::Mat m, bool li, int hi, double size)
+void draw_button(const char * const s,int x1,int x2,int y1,int y2,cv::Mat m, bool li, int hi, double size)
 {
     cv::Scalar col;
     if (hi) col = COL_BUTTON_HI; else col = COL_BUTTON;
