@@ -1,0 +1,232 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS" />
+        <title>裸眼立体視ディスプレイ自作サポートプログラム</title>
+    <link rel="stylesheet" type="text/css" href="http://st.shinobi.jp/img/services/homepage/commercial.css" /></head>
+    <body>
+<font size="4">
+
+<pre>
+<p>
+<font size="+3"><b>
+さあ、裸眼立体視ディスプレイを作ってみよう！
+</b></font>
+
+<div style="border-style:solid;border-width:1px;width:450px;">
+ <b>-もくじ-</b>
+ <a href="#ready">0)レンチキュラーレンズを用意する</a>
+ <a href="#run">1)レンチキュラーレンズを置く＆プログラムを実行する</a>
+ <a href="#slant">2)角度を調整</a>
+ <a href="#pitch">3)表示の間隔を調整</a>
+ <a href="#disp">4)画像を出してみる</a>
+ <a href="#etc">その他</a>
+
+</div>
+
+簡単な[<a href="https://www.youtube.com/watch?v=PCGySQLHjrw" Target="_blank">つかいかた動画</a>]を作ってみました。
+参考にしてみてください。
+
+
+<a name="ready"><b>0)レンチキュラーレンズを用意する</b></a>
+
+まず何は無くとも印刷用の<font size="+2"><font color=blue><b>レンチキュラーレンズ</b></font></font>を入手します。
+ネットで検索すると通信販売しているお店がいくつか見つかると思います。<font color=red><b>買いましょう。</b></font>
+
+(私は、<font color=red><b>30LPI</b></font>や<font color=red><b>15LPI</b></font>広視野角レンズの切り替え角が広い見え方が好きですが、
+<font color=red><b>40LPI</b></font>狭視野角レンズの見え方もぐっとくるものがあります。)
+(お店によっては『お試しなんちゃらセット』のような名称で、手頃なサイズのレンズが数種類入った商品もありますので
+興味がございましたら、ぜひぜひ。)
+
+
+参考：
+
+自宅の液晶モニター(DELLの27インチ)で試してみたところ、<a href="http://www.jomon.ne.jp/~artnow/lenti/lenti.html" Target="_blank">こちら</a>の厚いシリーズはひととおり使えました。
+最近のノートPCの解像度の高いものですと、薄いシリーズでも結構いけます。
+ただし、薄くなるとピントが合わなくなってくる傾向です。
+(ALIENWARE 14の液晶では、200LPI以外はそれなりに見えました)
+</p>
+<p>
+<a name="run"><b>1)レンチキュラーレンズを置く＆プログラムを実行する</b></a>
+☆どちらが先でも問題ありません。お好みで！☆
+
+・モニターにレンチキュラーレンズを置きます(またはテープで固定しちゃいます)。
+・プログラムを実行します。
+
+印刷用のレンチキュラーレンズを使う場合、<font color=blue><b>ギザギザのレンズ面を液晶側に向ける</b></font>ようにすると、
+だいたいピントが合います。0コンマmmぐらい浮かすとちょうど良く場合が多いようです。
+
+(印刷用のレンチキュラーレンズは、つるつる面にピントが合うようになってます。
+液晶の場合、保護層とかの厚みがあるので、普通に置いてもピントが合いません。)
+
+時計の短針方向で12時半～1時ぐらいの角度<font color=red><b>／</b></font>がいいようです。
+モアレが見えづらくなるような角度で調整してみると良いかと思います。
+
+反対の11時～11時半<font color=red><b>＼</b></font>でもいいのですが、<font color=red><b>実はこっち方向はちょっとバグってる気配</b></font>です。
+現在はやめといたほうがいいかも。
+
+</p>
+<p>
+
+<font color=red><b>以下、2)と3)の調整は片目をつぶって行なうのがおすすめ。</b></font>
+
+<a name="slant"><b>2)角度を調整</b></a>
+☆レンズのギザギザと線の角度を合わせます☆
+
+[slant]ボタンをクリック(プログラム実行直後はこの状態です)。
+左ボタンドラッグでラインの角度を変えて、レンズの傾きに合わせます。
+カーソルキー左右[← →]、または[A,D]キーで微調整できます。
+
+<a href="man_img/NaEcalib01.jpg" Target="_blank"><img border="1" alt="pic01.png"  align="left" width="640" src="man_img/NaEcalib01.jpg" /></a>
+<br clear=all> 
+ラインがムラなく直線に見える、
+もしくは視点を変えてみて(右や左から覗きこんで)、ライン全体が消えたり見えたりする状態にします。
+
+こんなかんじ。
+<a href="man_img/NaEcalib02.jpg" Target="_blank"><img border="1" alt="pic02.png"  align="left" width="640" src="man_img/NaEcalib02.jpg" /></a>
+<br clear=all> 
+
+(辞書で引いたら"slant"って単語が出てきたんで使ってるんだけど、使い方これで合ってるのかな？)
+</p>
+
+<p>
+<a name="pitch"><b>3)表示の間隔を調整</b></a>
+☆視点によってピンク塗り潰しとイエロー塗り潰しがパッパッと切り替わって見える状態を目指します☆
+
+[pitch]ボタンをクリック。
+左ボタンドラッグでpitchの値を調整。
+カーソルの縦位置で調整できる桁が変わります。
+大きい桁から小さい桁へと合わせていくと良いです。
+カーソルキー左右[← →]、または[A,D]キーで微調整できます。
+
+最初はこんなかんじですが、
+<a href="man_img/NaEcalib03.jpg" Target="_blank"><img border="1" alt="pic03.png"  align="left" width="640" src="man_img/NaEcalib03.jpg" /></a>
+<br clear=all> 
+
+値を大きく変えていくと、こんなふうに見えてくるポイントがあります。
+<a href="man_img/NaEcalib04.jpg" Target="_blank"><img border="1" alt="pic04.png"  align="left" width="640" src="man_img/NaEcalib04.jpg" /></a>
+<br clear=all> 
+
+小さい桁で微調整していきます。
+<a href="man_img/NaEcalib05.jpg" Target="_blank"><img border="1" alt="pic05.png"  align="left" width="640" src="man_img/NaEcalib05.jpg" /></a>
+<br clear=all> 
+
+色のムラが無くなる状態が最適位置です。
+<a href="man_img/NaEcalib06.jpg" Target="_blank"><img border="1" alt="pic06.png"  align="left" width="640" src="man_img/NaEcalib06.jpg" /></a>
+<br clear=all> 
+
+レンズが反ったりしていると、均一には見えません。
+その時はしょうがないのでアバウトにいきましょう。(大丈夫、それなりに見えます)
+
+レンズを液晶面から少し浮かせるとピントが合ってクリアに見えたりします。
+<font color=red>100円ショップの透明したじき</font>を挟んだりするのがおすすめです。
+3Dプリンターとかがあれば、積層ピッチで調整するスペーサーが作れますね。
+
+・適正pitch値の2倍、4倍、1/2、1/4の値でも、それなりに見えたりしますが、
+適正なpitch値の場合は見えかたが鮮明になります。
+
+・とりあえず、適正pitchの目安には<a href=http://z800.yokinihakarae.com/html5test/sachiicalc02.html Target="_blank">さっちゃん電卓</a>をお試しください☆
+<font color=red><b>さっちゃん電卓</b></font>は、40LPI (厚さ2.08mm)用のおおよそのpitchを<font color=blue><b>さっちゃん係数</b></font>を元にして計算します。
+他のLPI用のおおよそのpitchも、さっちゃん電卓の結果から比率で計算できます。
+
+・同じモニターと同じレンズでも、レンズの傾き具合で適正なpitchは変動します。
+
+・適正なpitchの値は、見る距離によっても変動します。
+調整中は画面に近寄っちゃいがちなのですが、
+鑑賞する時の距離に合わせて調整する必要があります。
+(これ、現状の裸眼立体視ディスプレイの問題点のひとつです)
+
+ちなみに、pitchの値は
+<font color=red><b>サブピクセル(RGBの各画素)一個がレンズ一本内の横方向に入っている個数</b></font>
+です。
+この値の小数点以下を切り捨てた値が、
+モニターとレンズ(の傾き)の組み合わせで出せる<font color=blue><b>視点数の物理的な上限</b></font>となります。
+</p>
+
+<p>
+<a name="disp"><b>4)画像を出してみる</b></a>
+
+[disp >]ボタンをクリック。
+現在の調整値に合わせた画像を表示します。ちゃんと見えるかな？
+<a href="man_img/NaEcalib07.jpg" Target="_blank"><img border="1" alt="pic07.png"  align="left" width="640" src="man_img/NaEcalib07.jpg" /></a>
+<br clear=all>
+ちなみに、レンズを取るとこういう画像が表示されてます。
+<a href="man_img/NaEcalib08.jpg" Target="_blank"><img border="1" alt="pic08.png"  align="left" width="640" src="man_img/NaEcalib08.jpg" /></a>
+<br clear=all>
+上の調整ができてれば、見えるはずなんですが、見えなかったら…質問ください。(mer2でぐぐれかす)
+</p>
+
+<p>
+<a name="etc"><b>ついでに：</b></a>
+・実行ファイルと同じ場所にある「pic」フォルダ内の多視点画像を合成しています。
+ファイル名のフォーマットを合わせる必要がありますが、自前の多視点画像と差し替えることも可能です。
+
+ファイル名フォーマットは：
+<font color=red>blender_00000_X.png
+blender_00000_X.jpg</font>
+・jpgかpngのみ対応
+・「X」の部分は0から始まる連番
+・連番画像ファイルの縦横は同じサイズであれば、縦横サイズは自由
+
+となっております。同梱サンプルは32視点になってますが、差し替える場合は<font color=red><b>視点数も任意</b></font>です。
+<font size="+1"><font color=blue><b>それで効果があるかどうかはまだ未知数ですが、100視点だってできます。</b></font></font>
+縦横サイズや視点数が大きくなると、合成に時間がかかるようになるので注意。
+
+うっかり視点の並びが逆の連番を作っちゃっても大丈夫、
+[disp <]ボタン
+で逆順に合成します。
+
+
+・初期状態では表示サイズ<font color=red>640x512,pitch=8.0</font>になってますが、起動オプションで各数値の初期値を変更できます。
+たとえば
+<font color=blue>> NaE_calib -w 480 -h 1200 -p 20.0</font>
+で表示サイズ<font color=red>480x1200,pitch=20.0</font>で起動します。
+縦の表示が長いほうが、傾き調整の精度が高くなりますが、表示を大きくすると処理が重くなるので注意です。
+
+ショートカットを作ってやるのが楽かもしれません。
+こんなふう：
+
+<img border="1" alt="pic09.png"  align="left" src="man_img/NaEcalib09.jpg" >
+<br clear=all>
+
+
+<b>不具合：</b>
+・上でも書いてますが、傾き11時方向側の処理がばぐっている気配。
+x:1 y:3の割合の傾きだと合瀬画面が真っ暗になります。
+・傾きが垂直方向に近くなると暗く、水平方向に行くと明るくなってしまいます。
+(マスクの作りが甘いようです)
+・slantの調整が2ドット単位っていうのは良くない
+
+
+<b>おまけ：</b>
+サンプル多視点画像を作成するのに使ったBlendファイルが入っています。
+<a href="http://www.blender.org/" Target="_blank">Blender 2.72b</a>で作成。
+Blendファイル内には<font color=blue><b>多視点画像作成スクリプト</b></font>が付いてます。
+詳しくは<a href="http://z800.blog.shinobi.jp/blender/%E3%81%95%E3%81%82%E3%81%BF%E3%82%93%E3%81%AA%E3%80%81blender%E3%81%A7%E5%A4%9A%E8%A6%96%E7%82%B9%E3%81%97%E3%82%88%E3%81%86%E3%81%9C%E3%80%82-%E5%BC%B7%E5%88%B6%E3%81%AF%E3%81%97%E3%81%AA%E3%81%84-
+" Target="_blank">こちら</a>をどうぞ。
+
+簡単に：
+windows:
+<font color=blue>C:/blender_multi</font>
+Mac,Linux:
+<font color=blue>~/blender_multi</font>
+を作っておく
+
+テキストエディタ上で <font color=blue>"Alt+p"</font>
+
+<font color=blue>bpy.ops.object.camerra_array_set_vertical()
+bpy.ops.object.camerra_array_renderframe()</font>
+でサンプル画像と同じものができます。
+
+
+<font color=red><b>本気でモニター全画面をレンチキュラーレンズで覆いたくなったら</b></font>、
+<a href="http://z800.yokinihakarae.com/NaE_beta/lent_calc01.html" Target="_blank">こちら</a>を参考に。
+(初期状態は、27インチサイズを切り出す場合。A1サイズで1:3だと幅が少し足りなくなります。)
+
+</p>
+
+</pre>
+
+</font>
+
+</html>
