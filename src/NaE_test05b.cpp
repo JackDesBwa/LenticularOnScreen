@@ -1,8 +1,4 @@
 //
-//  とりあえず、GPL v3です。
-//
-
-//
 //    Copyright 2013,2014 Mercy Yamada.
 //    for personal use only. not for commercial use. 
 //
@@ -24,7 +20,6 @@
 
 
 //
-//さんこう：
 //http://minus9d.hatenablog.com/entry/2014/03/21/003350
 //
 
@@ -46,12 +41,11 @@ extern int view_num;
 extern int mirror;
 extern int print;
 
-extern int WX,WY;//マスクのサイズ
-extern int XT,YT;//傾き基準
+extern int WX,WY;
+extern int XT,YT;
 
-extern double Lvalue;//線の明るさ(間に合わせ？)
+extern double Lvalue;
 
-//プロトタイプ宣言
 void mergePt(unsigned char *s,unsigned char *d, int map, int x,int y);
 
 int alloc_MAP();
@@ -60,7 +54,6 @@ void make_MAP();
 void test_MAP_ch(unsigned char *d,int map);
 cv::Mat temp;
 
-//グローバルおじさん
 cv::Mat view1;
 cv::Mat view2;
 cv::Mat disp;
@@ -112,7 +105,7 @@ int adjust_2v(unsigned char *v1,unsigned char *v2,unsigned char *d)
 {
 
 
-    view_num = ((int(floor(pitch+1+0.5)))/2+1)*2; //無理矢理偶数
+    view_num = ((int(floor(pitch+1+0.5)))/2+1)*2;
     
     // alloc map memory
     int mem_alloc=0;
@@ -157,8 +150,6 @@ err:
     
 }
 
-
-//まじでグローバルおじさん
 bool dragging = false;
 
 int clickX;
@@ -230,8 +221,6 @@ void calc_pitch()
     if (pitch<2.0) pitch=t;
 }
 
-
-// コールバック関数
 void my_mouse_callback(int event, int x, int y, int flags, void* param){
     cv::Mat* image = static_cast<cv::Mat*>(param);
     
@@ -463,7 +452,6 @@ int main( int argc, const char* argv[] )
     
     cv::namedWindow(name, CV_WINDOW_AUTOSIZE);
     
-    // コールバックを設定
     cv::setMouseCallback(name, my_mouse_callback, (void *)&image);
     
     dx1=0;dx2=WX-1;
@@ -616,7 +604,6 @@ int main( int argc, const char* argv[] )
                 if (area_digit[4]&&(i==7)) col=COL_YELLOW;
             }
             
-            //にばんめ、さんばんめのgetaはひきょうちゅうい
             cv::putText(temp, s, cv::Point(WX/2+geta+i*(geta/5),WY-geta/2), cv::FONT_HERSHEY_SIMPLEX, fnsize, col, 2, CV_AA);
         }
         

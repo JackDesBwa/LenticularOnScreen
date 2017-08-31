@@ -1,8 +1,3 @@
-//
-//  とりあえず、GPL v3です。
-//
-
-//
 //    Copyright 2013,2014 Mercy Yamada.
 //    for personal use only. not for commercial use. 
 //
@@ -22,33 +17,24 @@
 //    along with "Neil and Eliza".  If not, see <http://www.gnu.org/licenses/>.
 //
 
-
-// 参考：
-//http://d.hatena.ne.jp/nodamushi/20101223/1293136222
-//
-// これでいけちゃうかな？
-//
-// こっちも参考：
-//http://d.hatena.ne.jp/ousttrue/20090224/1235499257
+// References about Gupta-Sproull antialiasing algorithm
+// http://d.hatena.ne.jp/nodamushi/20101223/1293136222
+// http://d.hatena.ne.jp/ousttrue/20090224/1235499257
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
 
-//外部グローバル変数
 double pitch=7;
 int view_num =8;
 int mirror =0;
 int print =0;
 
-int WX,WY;//マスクのサイズ
-int XT,YT;//傾き基準
+int WX,WY; // size
+int XT,YT; // inclination
 
-double Lvalue=1.0;//線の明るさ(間に合わせ？)
+double Lvalue=1.0; // luminosity
 
-
-
-//内部グローバル変数
 int mapPos;
 int mapW;
 
@@ -129,8 +115,8 @@ inline void GuptaSproull(double SX, double SY) {
     p4 = hypot((xx1-xx0), (yy1-yy0));
     
     double xl,yl;
-    bool straight;//水平方向または垂直方向に一直線かどうか
-    bool vertical;//垂直方向に多く進むかどうか
+    bool straight; // Whether it is aligned horizontally or vertically
+    bool vertical; // Whether or not to proceed more in the vertical direction
     
     xl=abs(dx);
     yl=abs(dy);
@@ -141,8 +127,8 @@ inline void GuptaSproull(double SX, double SY) {
     straight = yl==0 ||xl==0;
     vertical = straight?xl==0:yl>xl;
     
-    //今回は、いらない。
-    if(straight){//垂直か水平に一直線
+    // This time, we do not need.
+    if(straight){
         if(vertical){
             for(double y=yy0;y!=yy1;y++) aapset_vertical(SX, y);
         }else{
@@ -154,7 +140,7 @@ inline void GuptaSproull(double SX, double SY) {
     if (yl<xl) vertical=!vertical;
     if (mirror) vertical=!vertical;
     
-    //これでいいのかな
+    // Is this OK?
     if(vertical){
         double dt=xl/yl;
         double x,yy;
@@ -427,9 +413,9 @@ void mergePt_prn(unsigned int *s,unsigned int *d, int map, int x,int y)
 
 
 int alloc_MAP()
-// 正常：0
-// 一段階エラー：1
-// 二段階エラー：2
+// Normal：0
+// One step error：1
+// Two-step error：2
 {
     
     if (print) mapW=WX;
