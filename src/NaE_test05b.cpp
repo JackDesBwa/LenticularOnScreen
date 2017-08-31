@@ -408,9 +408,9 @@ void display() {
 }
 
 int main(int argc, const char *argv[]) {
-  const char *keys = {"{w|width  |640 |width}"
-                      "{h|height |512 |height }"
-                      "{p|pitch  |8.0 |pitch  }"};
+  const char *keys = {"{w width  |640 |width}"
+                      "{h height |512 |height }"
+                      "{p pitch  |8.0 |pitch  }"};
   cv::CommandLineParser parser(argc, argv, keys);
 
   WX = parser.get<int>("w");
