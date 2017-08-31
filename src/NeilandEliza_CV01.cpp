@@ -41,7 +41,7 @@ int mapW;
 int dx, dy;
 double xx0, xx1, yy0, yy1;
 
-int XT0, YT0;
+int XT0;
 
 unsigned char **mapP;
 
@@ -115,9 +115,6 @@ inline void GuptaSproull(double SX, double SY) {
 
   xl = abs(dx);
   yl = abs(dy);
-  straight = yl == 0 || xl == 0;
-  vertical = straight ? xl == 0 : yl > xl;
-
   straight = yl == 0 || xl == 0;
   vertical = straight ? xl == 0 : yl > xl;
 
@@ -208,87 +205,11 @@ double init_table(double pitch, int view_num, int mirror) {
 #define C2B(c) ((int)((c)&0xff))
 #define RGB2C(r, g, b) ((r)*0x10000 + (g)*0x100 + (b))
 
-void test_MAP_ch(unsigned char *d, int map) {
-  int c;
-  for (int y = 0; y < WY; y++) {
-    for (int x = 0; x < WX; x++) {
-      c = mapP[map][XY2PT(x, y, mapW)];
-      d[XY2PT(x * 3, y, WX * 3)] = c;
-      d[XY2PT(x * 3 + 1, y, WX * 3)] = c;
-      d[XY2PT(x * 3 + 2, y, WX * 3)] = c;
-    }
-  }
-}
-void test_MAP(unsigned int *d, int map) {
-  int c;
-  for (int y = 0; y < WY; y++) {
-    for (int x = 0; x < WX; x++) {
-      c = mapP[map][XY2PT(x, y, mapW)];
-      d[XY2PT(x, y, WX)] = RGB2C(c, c, c);
-    }
-  }
-}
-
-void test_MAP_full(unsigned int *d, int map) {
-  int c;
-  for (int y = 0; y < WY; y++) {
-    for (int x = 0; x < mapW; x++) {
-      c = mapP[map][XY2PT(x, y, mapW)];
-      d[XY2PT(x, y, mapW)] = RGB2C(c, c, c);
-    }
-  }
-}
-
-void mergePt_int(unsigned int *s, unsigned int *d, int map, int x, int y) {
-  int rs, gs, bs;
-  int rd, gd, bd;
-  int rm, gm, bm;
-  int r, g, b;
-
-  int W;
-  int col;
-  W = mapW / 3;
-
-  col = s[XY2PT(x, y, W)];
-  rs = C2R(col);
-  gs = C2G(col);
-  bs = C2B(col);
-
-  rm = (int)mapP[map][XY2PT(x * 3, y, mapW)];
-  gm = (int)mapP[map][XY2PT(x * 3 + 1, y, mapW)];
-  bm = (int)mapP[map][XY2PT(x * 3 + 2, y, mapW)];
-
-  r = (rs * rm) / 255;
-  g = (gs * gm) / 255;
-  b = (bs * bm) / 255;
-
-  col = d[XY2PT(x, y, W)];
-  rd = C2R(col);
-  gd = C2G(col);
-  bd = C2B(col);
-
-  rd += r;
-  gd += g;
-  bd += b;
-
-  if (rd > 255)
-    rd = 255;
-  if (gd > 255)
-    gd = 255;
-  if (bd > 255)
-    bd = 255;
-
-  d[XY2PT(x, y, W)] = RGB2C(rd, gd, bd);
-}
-
 void mergePt(unsigned char *s, unsigned char *d, int map, int x, int y) {
   int rs, gs, bs;
   int rd, gd, bd;
   int rm, gm, bm;
   int r, g, b;
-
-  int W;
-  W = mapW / 3;
 
   rs = s[XY2PT(x * 3, y, mapW)];
   gs = s[XY2PT(x * 3 + 1, y, mapW)];
@@ -320,89 +241,6 @@ void mergePt(unsigned char *s, unsigned char *d, int map, int x, int y) {
   d[XY2PT(x * 3, y, mapW)] = rd;
   d[XY2PT(x * 3 + 1, y, mapW)] = gd;
   d[XY2PT(x * 3 + 2, y, mapW)] = bd;
-}
-
-void mergePt00(unsigned char *s, unsigned char *d, int map, int x, int y) {
-  int rs, gs, bs;
-  int rd, gd, bd;
-  int rm, gm, bm;
-  int r, g, b;
-
-  int W;
-  W = mapW / 3;
-
-  rs = s[XY2PT(x * 3, y, mapW)];
-  gs = s[XY2PT(x * 3 + 1, y, mapW)];
-  bs = s[XY2PT(x * 3 + 2, y, mapW)];
-
-  rm = (int)mapP[map][XY2PT(x * 3, y, mapW)];
-  gm = (int)mapP[map][XY2PT(x * 3 + 1, y, mapW)];
-  bm = (int)mapP[map][XY2PT(x * 3 + 2, y, mapW)];
-
-  r = (rs * rm) / 255;
-  g = (gs * gm) / 255;
-  b = (bs * bm) / 255;
-
-  rd = d[XY2PT(x * 3, y, mapW)];
-  gd = d[XY2PT(x * 3 + 1, y, mapW)];
-  bd = d[XY2PT(x * 3 + 2, y, mapW)];
-
-  rd += r;
-  gd += g;
-  bd += b;
-
-  if (rd > 255)
-    rd = 255;
-  if (gd > 255)
-    gd = 255;
-  if (bd > 255)
-    bd = 255;
-
-  d[XY2PT(x * 3, y, mapW)] = rd;
-  d[XY2PT(x * 3 + 1, y, mapW)] = gd;
-  d[XY2PT(x * 3 + 2, y, mapW)] = bd;
-}
-
-void mergePt_prn(unsigned int *s, unsigned int *d, int map, int x, int y) {
-  int rs, gs, bs;
-  int rd, gd, bd;
-  int rm, gm, bm;
-  int r, g, b;
-
-  int W;
-  int col;
-  W = mapW;
-
-  col = s[XY2PT(x, y, W)];
-  rs = C2R(col);
-  gs = C2G(col);
-  bs = C2B(col);
-
-  rm = (int)mapP[map][XY2PT(x * 3, y, mapW)];
-  gm = (int)mapP[map][XY2PT(x * 3 + 1, y, mapW)];
-  bm = (int)mapP[map][XY2PT(x * 3 + 2, y, mapW)];
-
-  r = (rs * rm) / 255;
-  g = (gs * gm) / 255;
-  b = (bs * bm) / 255;
-
-  col = d[XY2PT(x, y, W)];
-  rd = C2R(col);
-  gd = C2G(col);
-  bd = C2B(col);
-
-  rd += r;
-  gd += g;
-  bd += b;
-
-  if (rd > 255)
-    rd = 255;
-  if (gd > 255)
-    gd = 255;
-  if (bd > 255)
-    bd = 255;
-
-  d[XY2PT(x, y, W)] = RGB2C(rd, gd, bd);
 }
 
 int alloc_MAP()

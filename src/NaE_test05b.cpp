@@ -47,7 +47,6 @@ void mergePt(unsigned char *s, unsigned char *d, int map, int x, int y);
 int alloc_MAP();
 void free_MAP();
 void make_MAP();
-void test_MAP_ch(unsigned char *d, int map);
 cv::Mat temp;
 
 cv::Mat view1;
@@ -216,7 +215,6 @@ void calc_pitch() {
 }
 
 void my_mouse_callback(int event, int x, int y, int flags, void *param) {
-  cv::Mat *image = static_cast<cv::Mat *>(param);
 
 #define SLANT_AREA (x >= sbx1) && (x <= sbx2) && (y >= sby1) && (y <= sby2)
 #define PITCH_AREA (x >= pbx1) && (x <= pbx2) && (y >= pby1) && (y <= pby2)
@@ -321,7 +319,7 @@ void draw_button(const char *const s, int x1, int x2, int y1, int y2, cv::Mat m,
     col = COL_BUTTON;
   cv::rectangle(m, cv::Point(x1, y1), cv::Point(x2, y2), col, -1, 4);
   cv::rectangle(m, cv::Point(x1, y1), cv::Point(x2, y2), COL_BLACK, 1, 4);
-  sprintf(msg, s);
+  sprintf(msg, "%s", s);
   if (li)
     col = COL_YELLOW;
   else
@@ -675,7 +673,6 @@ int main(int argc, const char *argv[]) {
     if (cursor) {
       while (cv::waitKey(15) != -1)
         ;
-      cursor = false;
     }
   }
 end:
