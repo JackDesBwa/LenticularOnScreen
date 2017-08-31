@@ -410,18 +410,12 @@ void display() {
 int main(int argc, const char *argv[]) {
   const char *keys = {"{w width  |640 |width}"
                       "{h height |512 |height }"
-                      "{p pitch  |8.0 |pitch  }"};
+                      "{p pitch  |8.5 |pitch  }"};
   cv::CommandLineParser parser(argc, argv, keys);
 
   WX = parser.get<int>("w");
   WY = parser.get<int>("h");
   pitch = parser.get<double>("p");
-  if (WX == 0)
-    WX = 640;
-  if (WY == 0)
-    WY = 512;
-  if (pitch == 0)
-    pitch = 8.5;
 
   printf("[ Neil and Eliza autostereoscopic-image calibrator ]\n");
 
