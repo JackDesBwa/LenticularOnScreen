@@ -113,7 +113,6 @@ int adjust_2v(unsigned char *v1,unsigned char *v2,unsigned char *d)
 
 
     view_num = ((int(floor(pitch+1+0.5)))/2+1)*2; //無理矢理偶数
-    //	printf("view_num:%d\n",view_num);
     
     // alloc map memory
     int mem_alloc=0;
@@ -132,10 +131,6 @@ int adjust_2v(unsigned char *v1,unsigned char *v2,unsigned char *d)
     
     mem_alloc=1;
     make_MAP();
-    /*
-     test_MAP_ch(disp.data,0);
-     cv::imshow("DISP", disp);
-     */
     for(int i=0;i<WX*WY*3;i++) d[i]=0;
     
     for (int i=0;i<view_num ;i++){
@@ -155,8 +150,6 @@ int adjust_2v(unsigned char *v1,unsigned char *v2,unsigned char *d)
         }
         
     }
-    //	cv::imshow("DISP", disp);
-    //	cv::imshow("DISP", view1);
 err:
     if (mem_alloc) free_MAP();
     
@@ -175,7 +168,6 @@ int nowX;
 int centerX;
 int geta;
 char msg[64];
-//cv::Scalar col;
 
 #define STATE_BEGIN 0
 #define STATE_SLANT 1
@@ -331,54 +323,36 @@ void draw_button(const char * const s,int x1,int x2,int y1,int y2,cv::Mat m, boo
 
 void display()
 {
-    //printf("displaytest\n");
     char fn[255];
 	char fnbase[]="pic/blender_00000_";
 	char ext[]=".jpg";
 
-//    char name[]="disp";
-
     int view_num0 = view_num;
     int WX0=WX,WY0=WY;
-    //	int state0=state;
-
-    //	cv::Mat src = cv::imread("pic/sample_0.png");na
-    //	disp = src.clone();
+    
     cv::Mat disp;
     cv::Mat src;
     int ct=0;
     
-//    sprintf(fn,"%spic/sample_%d.jpg",execpath,ct);
     sprintf(fn,"%s%s%d%s",execpath,fnbase,ct,ext);
-	//printf("%s\n",fn);
     disp = cv::imread(fn);
 	if (disp.data == NULL) {
 		sprintf(ext,".png");
 		sprintf(fn,"%s%s%d%s",execpath,fnbase,ct,ext);
 		printf("%s\n",fn);
 		disp = cv::imread(fn);
-		//if (disp.data == NULL) goto read_err;
 	}
  if (disp.data != NULL) {
     WX = disp.cols;
     WY = disp.rows;
-//    cv::imshow("disp", disp);
-
-//    int ct=0;
+    
     while(1){
-        //		cv::imshow("src", src);
-//        sprintf(fn,"%spic/sample_%d.jpg",execpath,ct);
 		sprintf(fn,"%s%s%d%s",execpath,fnbase,ct,ext);
-//        printf("%s\n",fn);
         src=cv::imread(fn);
         if (src.data == NULL) break;
-//        if (src.data == NULL) printf("NULL\n");
-//        if (ct==32) break;
         ct++;
     }
-//    printf("ct:%d\n",ct);
     view_num=ct;
-//	cv::imshow("src", src);
 
     // alloc map memory
     int mem_alloc=0;
@@ -398,27 +372,17 @@ void display()
     mem_alloc=1;
     make_MAP();
     
-    //	test_MAP_ch(disp.data,0);
-    //	cv::imshow("DISP", disp);
-    
     for(int i=0;i<WX*WY*3;i++) disp.data[i]=0;
 
 	int mapP;
     for (int i=0;i<view_num ;i++){
-//    for (int i=view_num-1;i>=0 ;i--){
-        
-        //sprintf(fn,"%spic/sample_%d.jpg",execpath,i);
 		sprintf(fn,"%s%s%d%s",execpath,fnbase,i,ext);
-        //printf("%s\n",fn);
         src=cv::imread(fn);
         
 		if (state==STATE_RDISP) mapP=view_num-i-1;
 		else mapP=i;
-//        mapP=i;
-//		mapP=view_num-i-1;
         for (int y=0;y<WY;y++){
             for (int x=0;x<WX;x++){
-//                mergePt(src.data,disp.data,i, x,y);
                 mergePt(src.data,disp.data,mapP, x,y);
             }
         }
@@ -428,8 +392,6 @@ void display()
     cv::imshow("DISP", disp);
 display_err:
     if (mem_alloc) free_MAP();
-
-//read_err:
  }
     view_num = view_num0;
     WX=WX0,WY=WY0;
@@ -463,7 +425,6 @@ int main( int argc, const char* argv[] )
 
 	printf("[ Neil and Eliza autostereoscopic-image calibrator ]\n");
     
-//	cv::Mat line_work(cv::Size(WX*3, WY), CV_8UC1, cv::Scalar(50));
 	cv::Mat line_work(cv::Size(WX*3, WY), CV_8UC1, COL_DARKGRAY);
 	cv::Mat line_temp;
 
@@ -477,7 +438,6 @@ int main( int argc, const char* argv[] )
     
     geta=(100*mlt)/100;
     
-//    centerX = WX/2;
 	centerX = line_work.cols/2;
     button_w=(149*mlt)/100;
     button_h=geta-1;
@@ -492,7 +452,6 @@ int main( int argc, const char* argv[] )
     
     
     double fnsize = (1.0*mlt)/100;
-    //	printf("%d %f\n",mlt,fnsize);
     
     std::string name = "Neil and Eliza calibration";
     
@@ -546,7 +505,6 @@ int main( int argc, const char* argv[] )
 		image.copyTo(temp);
 
         int c = cv::waitKey(15);
-		//if (c!=-1) printf("\nc:%d\n",c);
 		bool cursor=false;
 		switch (c) {
 			case CV_WAITKEY_ESC:
@@ -557,11 +515,7 @@ int main( int argc, const char* argv[] )
 			case 'A':
 				if ((state==STATE_SLANT)&&(!dragging)) nowX--;
 				if ((state==STATE_PITCH)&&(!dragging)) {
-//					ptmp=pitch;
 					dtX--;
-//					calc_pitch();
-//					pitch_in=true;
-//					dtX=0;
 					cursor=true;
 				}
 				break;
@@ -570,11 +524,8 @@ int main( int argc, const char* argv[] )
 			case 'D':
 				if ((state==STATE_SLANT)&&(!dragging)) nowX++;
 				if ((state==STATE_PITCH)&&(!dragging)) {
-//					ptmp=pitch;
 					dtX++;
 					calc_pitch();
-//					pitch_in=true;
-//					dtX=0;
 					cursor=true;
 				}
 				break;
@@ -584,7 +535,6 @@ int main( int argc, const char* argv[] )
 			calc_pitch();
 			pitch_in=true;
 			dtX=0;
-//			cursor=false;
 		}
 
 
@@ -597,10 +547,8 @@ int main( int argc, const char* argv[] )
         
 #define XY2PT(x,y,widex) (((y)*(widex))+(x))
 		if (state==STATE_SLANT){
-			//サブピクセルライン
 			line_work.copyTo(line_temp);
 			cv::line(line_temp,cv::Point(centerX+nowX+dtX,geta),cv::Point(centerX-nowX-dtX,WY-geta),cv::Scalar(255),1,CV_AA);
-//			cv::imshow("work", line_temp);
 			for (int y=geta;y<(WY-geta)+1;y++){
 				for (int x=0;x<WX;x++){
 					temp.data[XY2PT(x*3+2,y,WX*3)] = line_temp.data[XY2PT(x*3,  y,WX*3)];
@@ -608,19 +556,13 @@ int main( int argc, const char* argv[] )
 					temp.data[XY2PT(x*3,  y,WX*3)] = line_temp.data[XY2PT(x*3+2,y,WX*3)];
 				}
 			}
-			//1ドットライン
-            //cv::line(temp,cv::Point(centerX+nowX+dtX,geta),cv::Point(centerX-nowX-dtX,WY-geta),cv::Scalar(0, 0, 200),1,CV_AA);
 		}
  
 
         if (state==STATE_PITCH) {
             if ((dragging)||(pitch_in)) {
                 pitch_in=false;
-//				calc_pitch();
                 if (!cursor) calc_pitch();
-                //disp.setTo(cv::Scalar(0, 0, 0));
-//                view1.setTo(cv::Scalar(0, 255, 255));
-//                view2.setTo(cv::Scalar(255, 0, 255));
                 view1.setTo(COL_VIEW_1);
                 view2.setTo(COL_VIEW_2);
                 
@@ -647,7 +589,6 @@ int main( int argc, const char* argv[] )
         
         if (state==STATE_SLANT) {
             XT=abs((centerX-nowX-dtX)-(centerX+nowX+dtX));
-//            YT=abs((geta)-(WY-geta));
             YT=((WY-geta)-geta)*3;
         }
         
@@ -681,11 +622,9 @@ int main( int argc, const char* argv[] )
         
         
         if (mirror) {
-            //printf("param: -x %5d -y %5d -pitch %8.4f -mirror\r",XT,YT,pitch);
 			fprintf(stderr,"param: -x %5d -y %5d -pitch %8.4f -mirror\r",XT,YT,pitch);
 			fflush(stderr);
 		} else {
-            //printf("param: -x %5d -y %5d -pitch %8.4f        \r",XT,YT,pitch);
             fprintf(stderr,"param: -x %5d -y %5d -pitch %8.4f        \r",XT,YT,pitch);
 			fflush(stderr);
 		}
