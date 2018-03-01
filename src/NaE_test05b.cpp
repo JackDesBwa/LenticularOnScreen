@@ -417,6 +417,10 @@ int main(int argc, const char *argv[]) {
   WY = parser.get<int>("h");
   pitch = parser.get<double>("p");
 
+  if (WX == 0) WX = 640;
+  if (WY == 0) WY = 512;
+  if (pitch == 0) pitch = 8.5;
+
   printf("[ Neil and Eliza autostereoscopic-image calibrator ]\n");
 
   cv::Mat line_work(cv::Size(WX * 3, WY), CV_8UC1, COL_DARKGRAY);
