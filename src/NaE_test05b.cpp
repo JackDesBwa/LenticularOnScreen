@@ -325,7 +325,7 @@ void draw_button(const char *const s, int x1, int x2, int y1, int y2, cv::Mat m,
   else
     col = COL_RED;
   cv::putText(m, msg, cv::Point(x1 + button_w / 4, y1 + (button_h / 5) * 3),
-              cv::FONT_HERSHEY_SIMPLEX, size, col, 2, CV_AA);
+              cv::FONT_HERSHEY_SIMPLEX, size, col, 2, cv::LINE_AA);
 }
 
 void display() {
@@ -476,7 +476,7 @@ int main(int argc, const char *argv[]) {
   view2 = image.clone();
   calib = image.clone();
 
-  cv::namedWindow(name, CV_WINDOW_AUTOSIZE);
+  cv::namedWindow(name, cv::WINDOW_AUTOSIZE);
 
   cv::setMouseCallback(name, my_mouse_callback, (void *)&image);
 
@@ -567,7 +567,7 @@ int main(int argc, const char *argv[]) {
       line_work.copyTo(line_temp);
       cv::line(line_temp, cv::Point(centerX + nowX + dtX, geta),
                cv::Point(centerX - nowX - dtX, WY - geta), cv::Scalar(255), 1,
-               CV_AA);
+               cv::LINE_AA);
       for (int y = geta; y < (WY - geta) + 1; y++) {
         for (int x = 0; x < WX; x++) {
           temp.data[XY2PT(x * 3 + 2, y, WX * 3)] =
@@ -624,15 +624,15 @@ int main(int argc, const char *argv[]) {
 
     sprintf(msg, "XT:%5d", XT);
     cv::putText(temp, msg, cv::Point((WX * 5) / 100, WY - (geta * 3) / 5),
-                cv::FONT_HERSHEY_SIMPLEX, fnsize, COL_RED, 2, CV_AA);
+                cv::FONT_HERSHEY_SIMPLEX, fnsize, COL_RED, 2, cv::LINE_AA);
 
     sprintf(msg, "YT:%5d", YT);
     cv::putText(temp, msg, cv::Point((WX * 5) / 100, WY - (geta * 2) / 10),
-                cv::FONT_HERSHEY_SIMPLEX, fnsize, COL_RED, 2, CV_AA);
+                cv::FONT_HERSHEY_SIMPLEX, fnsize, COL_RED, 2, cv::LINE_AA);
 
     sprintf(msg, "pitch:");
     cv::putText(temp, msg, cv::Point(WX / 2, WY - geta / 2),
-                cv::FONT_HERSHEY_SIMPLEX, fnsize, COL_RED, 2, CV_AA);
+                cv::FONT_HERSHEY_SIMPLEX, fnsize, COL_RED, 2, cv::LINE_AA);
     sprintf(msg, "%8.4f", pitch);
     char s[2];
     for (int i = 0; i < 8; i++) {
@@ -654,7 +654,7 @@ int main(int argc, const char *argv[]) {
 
       cv::putText(temp, s,
                   cv::Point(WX / 2 + geta + i * (geta / 5), WY - geta / 2),
-                  cv::FONT_HERSHEY_SIMPLEX, fnsize, col, 2, CV_AA);
+                  cv::FONT_HERSHEY_SIMPLEX, fnsize, col, 2, cv::LINE_AA);
     }
 
     if (mirror) {
